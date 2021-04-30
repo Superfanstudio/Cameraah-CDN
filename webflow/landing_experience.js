@@ -112,7 +112,7 @@ class Preview3D {
     let btnHeight = btn.height();
 
     let pC = phoneContainer;
-    let pCPosition = lastPhonePosition;
+    let pCPosition = this.lastPhonePosition;
     let pCX = pCPosition.x;
     let pCY = pCPosition.y;
     let pCWidth = pC.width();
