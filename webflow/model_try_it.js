@@ -18,10 +18,6 @@ function addonClick(selector, callback) {
     $(selector).on('click', callback);
 }
 
-function getTextureURL(selector) {
-    return $(selector).css("background-image").slice(5, -2)
-}
-
 function handleCycleColor() {
     let cycle = document.querySelector('#cycle-viewer');
     addonClick('#red-color-btn', () => { updateModel(cycle, COLOR, 'red body', 'red') });
@@ -44,13 +40,13 @@ function handlePhoneCase() {
 }
 function handleCouch() {
     let couch = document.querySelector('#couch-viewer');
-    addonClick('#couch-metallic', () => { updateModel(couch, TEXTURE, 'Leather', getTextureURL('#couch-metallic')) });
-    addonClick('#couch-tiger', () => { updateModel(couch, TEXTURE, 'Leather', getTextureURL('#couch-tiger')) });
-    addonClick('#couch-wood', () => { updateModel(couch, TEXTURE, 'Leather', getTextureURL('#couch-wood')) });
+    addonClick('#couch-metallic', () => { updateModel(couch, TEXTURE, 'Leather', 'https://cameraah-labs.s3.ap-south-1.amazonaws.com/Website+assets/couch-texture-1.jpg') });
+    addonClick('#couch-tiger', () => { updateModel(couch, TEXTURE, 'Leather', 'https://cameraah-labs.s3.ap-south-1.amazonaws.com/Website+assets/couch-texture-2.jpg') });
+    addonClick('#couch-wood', () => { updateModel(couch, TEXTURE, 'Leather', 'https://cameraah-labs.s3.ap-south-1.amazonaws.com/Website+assets/couch-texture-3.jpg') });
 
-    addonClick('#pillow-grey', () => { updateModel(couch, TEXTURE, 'Pillow1', getTextureURL('#pillow-grey')) });
-    addonClick('#pillow-fun', () => { updateModel(couch, TEXTURE, 'Pillow1', getTextureURL('#pillow-fun')) });
-    addonClick('#pillow-red', () => { updateModel(couch, TEXTURE, 'Pillow1', getTextureURL('#pillow-red')) });
+    addonClick('#pillow-grey', () => { updateModel(couch, TEXTURE, 'Pillow1', 'https://cameraah-labs.s3.ap-south-1.amazonaws.com/Website+assets/pillow-texture-1.jpg') });
+    addonClick('#pillow-fun', () => { updateModel(couch, TEXTURE, 'Pillow1', 'https://cameraah-labs.s3.ap-south-1.amazonaws.com/Website+assets/pillow-texture-2.jpg') });
+    addonClick('#pillow-red', () => { updateModel(couch, TEXTURE, 'Pillow1', 'https://cameraah-labs.s3.ap-south-1.amazonaws.com/Website+assets/pillow-texture-3.jpg') });
 }
 
 handleCycleColor();
