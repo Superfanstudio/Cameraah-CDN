@@ -19,7 +19,7 @@ function addonClick(selector, callback) {
 }
 
 function getTextureURL(selector) {
-    return cors_anywhere + $(selector).css("background-image").slice(4, -1).replace(/["']/g, "")
+    return $(selector).css("background-image").slice(5, -2)
 }
 
 function handleCycleColor() {
