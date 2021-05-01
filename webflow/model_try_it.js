@@ -1,34 +1,58 @@
 const cors_anywhere = 'https://cors-anywhere.herokuapp.com/';
+const COLOR = 0;
+const TEXTURE = 1;
+function updateModel(model, type, modelComponent, newValue) {
+    switch (type) {
+    case COLOR:
+        model.updateMaterialColor(modelComponent, newValue);
+        break;
+    case TEXTURE:
+        model.updateMaterialTexture(modelComponent, newValue);
+        break;
+    default:
+        break;
+    }    
+}
+
+function addonClick(selector, callback) {
+    $(selector).on('click', callback);
+}
+
+function getTextureURL(selector) {
+    return cors_anywhere + $(selector).css("background-image").slice(4, -1).replace(/["']/g, "")
+}
+
 function handleCycleColor() {
     let cycle = document.querySelector('#cycle-viewer');
-    document.querySelector('#red-color-btn').onclick = () => { cycle.updateMaterialColor('red body', 'red') };
-    document.querySelector('#yellow-color-btn').onclick = () => { cycle.updateMaterialColor('red body', 'yellow') };
-    document.querySelector('#green-color-btn').onclick = () => { cycle.updateMaterialColor('red body', '#00ff2f') };
+    addonClick('#red-color-btn', () => { updateModel(cycle, COLOR, 'red body', 'red') });
+    addonClick('#yellow-color-btn', () => { updateModel(cycle, COLOR, 'red body', 'yellow') });
+    addonClick('#green-color-btn', () => { updateModel(cycle, COLOR, 'red body', '#00ff2f') });
 
-    document.querySelector('#black-handle-color-btn').onclick = () => { cycle.updateMaterialColor('black metal', 'black') };
-    document.querySelector('#white-handle-color-btn').onclick = () => { cycle.updateMaterialColor('black metal', 'white') };
-    document.querySelector('#grey-handle-color-btn').onclick = () => { cycle.updateMaterialColor('black metal', 'grey') };
+    addonClick('#black-handle-color-btn', () => { updateModel(cycle, COLOR, 'black metal', 'black') });
+    addonClick('#white-handle-color-btn', () => { updateModel(cycle, COLOR, 'black metal', 'white') });
+    addonClick('#grey-handle-color-btn', () => { updateModel(cycle, COLOR, 'black metal', 'grey') });
 
 }
 function handlePhoneCase() {
     let phone = document.querySelector('#case-viewer');
-    document.querySelector('#upload-texture-btn').onclick = () => { document.querySelector('#case-texture').click() }
-    document.querySelector('#case-texture').addEventListener('change', (e) => {
+    addonClick('#upload-texture-btn', () => { $('#case-texture').click() });
+    $('#case-texture').on('change', e => {
         let file = e.target.files[0];
-        phone.updateMaterialTexture('Image MAT', URL.createObjectURL(file));
-        document.querySelector('#upload-texture-btn').style.backgroundImage = "url(" + URL.createObjectURL(file) + ")";
+        updateModel(phone, TEXTURE, 'Image MAT', URL.createObjectURL(file));
+        $('#upload-texture-btn').css('background-image', `url("${URL.createObjectURL(file)}")`);
     })
 }
 function handleCouch() {
     let couch = document.querySelector('#couch-viewer');
-    document.querySelector('#couch-metallic').onclick = () => { couch.updateMaterialTexture('Leather', cors_anywhere + $('#couch-metallic').css("background-image").slice(4, -1).replace(/["']/g, "")) };
-    document.querySelector('#couch-tiger').onclick = () => { couch.updateMaterialTexture('Leather', cors_anywhere + $('#couch-tiger').css("background-image").slice(4, -1).replace(/["']/g, "")) };
-    document.querySelector('#couch-wood').onclick = () => { couch.updateMaterialTexture('Leather', cors_anywhere + $('#couch-wood').css("background-image").slice(4, -1).replace(/["']/g, "")) };
+    addonClick('#couch-metallic', () => { updateModel(couch, TEXTURE, 'Leather', getTextureURL('#couch-metallic')) });
+    addonClick('#couch-tiger', () => { updateModel(couch, TEXTURE, 'Leather', getTextureURL('#couch-tiger')) });
+    addonClick('#couch-wood', () => { updateModel(couch, TEXTURE, 'Leather', getTextureURL('#couch-wood')) });
 
-    document.querySelector('#pillow-grey').onclick = () => { couch.updateMaterialTexture('Pillow1', cors_anywhere + $('#pillow-grey').css("background-image").slice(4, -1).replace(/["']/g, "")) };
-    document.querySelector('#pillow-fun').onclick = () => { couch.updateMaterialTexture('Pillow1', cors_anywhere + $('#pillow-fun').css("background-image").slice(4, -1).replace(/["']/g, "")) };
-    document.querySelector('#pillow-red').onclick = () => { couch.updateMaterialTexture('Pillow1', cors_anywhere + $('#pillow-red').css("background-image").slice(4, -1).replace(/["']/g, "")) };
+    addonClick('#pillow-grey', () => { updateModel(couch, TEXTURE, 'Pillow1', getTextureURL('#pillow-grey')) });
+    addonClick('#pillow-fun', () => { updateModel(couch, TEXTURE, 'Pillow1', getTextureURL('#pillow-fun')) });
+    addonClick('#pillow-red', () => { updateModel(couch, TEXTURE, 'Pillow1', getTextureURL('#pillow-red')) });
 }
+
 handleCycleColor();
 handlePhoneCase();
 handleCouch();
