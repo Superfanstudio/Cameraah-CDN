@@ -186,7 +186,7 @@ class Preview3D {
       "border-radius": `${dimens.br}px`,
     });
     this.movePhone(undefined, undefined, false);
-    setTimeout(()=>this.doInitialAnimation((dimens.w>dimens.h)+1),200);
+    setTimeout(()=>this.doInitialAnimation((dimens.w<dimens.h)+1),200);
   }
 
   addEvents() {
