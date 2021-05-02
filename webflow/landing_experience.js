@@ -35,8 +35,7 @@ class Preview3D {
     this.movePhone();
     this.placeShowDemoButton();
     this.setupDeviceSelectors();
-    phoneContainer.show();
-
+    doInitialAnimation();
   }
 
   saveInitialPhonePosition() {
@@ -141,6 +140,15 @@ class Preview3D {
 
       deviceIcon.on("click", this.updateActiveDevice.bind(this));
     });
+  }
+
+  doInitialAnimation() {
+    let pC = phoneContainer;
+    let timeline = gsap.timeline();
+    timeline.to(pC, {opacity: 1})
+    timeline.to(pC, {x: "-=100"})
+    timeline.to(pC, {x: "+=200"})
+    timeline.to(pC, {x: "-=100"})
   }
 
   updateActiveDevice(e) {
@@ -283,5 +291,5 @@ try {
   Webflow.push(setFullHeight);
   Webflow.push(initPhonePreviewer);
 } catch (e) {
-  console.log("error in end-of-body scripts");
+  console.log("error in landing-experience script");
 }
