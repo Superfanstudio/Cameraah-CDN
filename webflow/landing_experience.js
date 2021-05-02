@@ -35,7 +35,7 @@ class Preview3D {
     this.movePhone();
     this.placeShowDemoButton();
     this.setupDeviceSelectors();
-    doInitialAnimation();
+    this.doInitialAnimation();
   }
 
   saveInitialPhonePosition() {
