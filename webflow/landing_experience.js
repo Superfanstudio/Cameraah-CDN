@@ -53,9 +53,7 @@ class Preview3D {
 
   movePhone(newX, newY, animate = false) {
     let pC = phoneContainer;
-    let pII = phoneInnerImage;
     let pCClass = "." + pC.attr("class");
-    let pIIClass = "." + pII.attr("class");
 
     let { x, y } = this.lastPhonePosition;
 
@@ -89,8 +87,19 @@ class Preview3D {
       });
     }
     // adjust phone inner image bg position
-    let bgX = newX + this.bgPositionOffset;
-    let bgY = newY;
+    this.moveBG(newX, newY, animate);
+
+    this.lastPhonePosition.x = newX;
+    this.lastPhonePosition.y = newY;
+  }
+
+  moveBG(phoneX, phoneY, animate) {
+    let pII = phoneInnerImage;
+    let pIIClass = "." + pII.attr("class");
+
+    let bgX = phoneX + this.bgPositionOffset;
+    let bgY = phoneY;
+
     let newBgPosition = {
       backgroundPosition: `-${bgX}px -${bgY}px`,
       duration: 0.3,
@@ -100,9 +109,6 @@ class Preview3D {
     } else {
       pII.css(newBgPosition);
     }
-
-    this.lastPhonePosition.x = newX;
-    this.lastPhonePosition.y = newY;
   }
 
   placeShowDemoButton() {
@@ -115,7 +121,6 @@ class Preview3D {
     let pCX = pCPosition.x;
     let pCY = pCPosition.y;
     let pCWidth = pC.width();
-    let pCHeight = pC.height();
 
     let btnX = pCX + pCWidth / 2 - btnWidth / 2;
     let btnY = pCY - btnHeight - 100;
@@ -137,14 +142,19 @@ class Preview3D {
 
       let data_str = encodeURIComponent(JSON.stringify(device));
       deviceIcon.attr("data-device", data_str);
-
       deviceIcon.on("click", this.updateActiveDevice.bind(this));
     });
   }
 
   doInitialAnimation() {
     let pC = phoneContainer;
-    let timeline = gsap.timeline();
+    let timeline = gsap.timeline({onUpdate: () => {
+      let matrix = pC.css("transform").replace(/[^0-9\-.,]/g, '').split(',').map(n=>parseFloat(n));
+      let phoneX = matrix[4];
+      let phoneY = matrix[5];
+      this.moveBG(phoneX, phoneY);
+    }});
+
     timeline.to(pC, {opacity: 1})
     timeline.to(pC, {x: "-=100"})
     timeline.to(pC, {x: "+=200"})
