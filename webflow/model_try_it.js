@@ -60,12 +60,12 @@ handleCouch();
 function convertImgToBase64URL(url, callback) {
     let img = new Image();
     img.onload = function() {
-        ctx = canvas.getContext('2d'), dataURL;
+        ctx = canvas.getContext('2d');
         canvas.height = img.height;
         canvas.width = img.width;
         ctx.drawImage(img, 0, 0);
-        dataURL = canvas.toDataURL("image/jpeg");
-        callback(URL.createObjectURL(dataURL));
+        let dataURL = canvas.toDataURL("image/jpeg");
+        callback(dataURL);
         canvas = null; 
     };
     img.crossOrigin = 'anonymous';
