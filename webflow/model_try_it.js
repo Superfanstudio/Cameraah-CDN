@@ -55,7 +55,7 @@ handleCouch();
 
 function convertImgToBase64URL(url, callback){
     var img = new Image();
-    img.crossOrigin = 'Anonymous';
+    img.crossOrigin = 'anonymous';
     img.onload = function(){
         var canvas = document.createElement('CANVAS'),
         ctx = canvas.getContext('2d'), dataURL;
