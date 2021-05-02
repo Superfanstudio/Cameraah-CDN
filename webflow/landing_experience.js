@@ -148,17 +148,21 @@ class Preview3D {
 
   doInitialAnimation(factor=1) {
     let pC = phoneContainer;
+    let {x,y} = getXYTransform(pC);
     let timeline = gsap.timeline({onUpdate: () => {
-      let matrix = pC.css("transform").replace(/[^0-9\-.,]/g, '').split(',').map(n=>parseFloat(n));
-      let phoneX = matrix[4];
-      let phoneY = matrix[5];
-      this.moveBG(phoneX, phoneY);
+      let {x,y} = getXYTransform(pC);
+      this.moveBG(x, y);
     }});
 
     timeline.to(pC, {opacity: 1})
-    timeline.to(pC, {x: `-=${factor * 100}`})
+    timeline.fromTo(pC, {x}, {x: x - factor * 100})
     timeline.to(pC, {x: `+=${factor * 200}`})
     timeline.to(pC, {x: `-=${factor * 100}`})
+  }
+
+  getXYTransform(ele) {
+    let matrix = ele.css("transform").replace(/[^0-9\-.,]/g, '').split(',').map(n=>parseFloat(n));
+    return {x: matrix[4], y: matrix[5]};
   }
 
   updateActiveDevice(e) {
