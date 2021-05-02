@@ -146,7 +146,7 @@ class Preview3D {
     });
   }
 
-  doInitialAnimation() {
+  doInitialAnimation(factor=1) {
     let pC = phoneContainer;
     let timeline = gsap.timeline({onUpdate: () => {
       let matrix = pC.css("transform").replace(/[^0-9\-.,]/g, '').split(',').map(n=>parseFloat(n));
@@ -156,9 +156,9 @@ class Preview3D {
     }});
 
     timeline.to(pC, {opacity: 1})
-    timeline.to(pC, {x: "-=100"})
-    timeline.to(pC, {x: "+=200"})
-    timeline.to(pC, {x: "-=100"})
+    timeline.to(pC, {x: `-=${factor * 100}`})
+    timeline.to(pC, {x: `+=${factor * 200}`})
+    timeline.to(pC, {x: `-=${factor * 100}`})
   }
 
   updateActiveDevice(e) {
@@ -182,7 +182,7 @@ class Preview3D {
       "border-radius": `${dimens.br}px`,
     });
     this.movePhone(undefined, undefined, false);
-    setTimeout(()=>this.doInitialAnimation(),200);
+    setTimeout(()=>this.doInitialAnimation((dimens.w>dimens.h)+1),200);
   }
 
   addEvents() {
