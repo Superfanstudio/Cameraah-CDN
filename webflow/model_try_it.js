@@ -32,8 +32,11 @@ function handleCycleColor() {
 }
 function handlePhoneCase() {
     let phone = document.querySelector('#case-viewer');
-    addonClick('#upload-texture-btn', () => $('#case-texture').click());
-    $('#case-texture').change( e => {
+    addonClick('#upload-texture-btn', e => {   
+        e.stopPropagation();
+        $('#case-texture').click();
+    });
+    $('#case-texture').change(e => {
         let file = e.target.files[0];
         updateModel(phone, TEXTURE, 'Image MAT', URL.createObjectURL(file));
         $('#upload-texture-btn').css('background-image', `url("${URL.createObjectURL(file)}")`);
