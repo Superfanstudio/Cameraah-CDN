@@ -1,7 +1,7 @@
 const baseURL = "https://cameraah-labs.s3.ap-south-1.amazonaws.com/Website+assets/";
 const COLOR = 0;
 const TEXTURE = 1;
-var canvas = document.createElement('mv-canvas');
+var canvas = document.createElement('canvas');
 function updateModel(model, type, modelComponent, newValue) {
     switch (type) {
     case COLOR:
