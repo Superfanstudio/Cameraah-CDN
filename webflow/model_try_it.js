@@ -64,8 +64,9 @@ function convertImgToBase64URL(url, callback) {
         canvas.height = img.height;
         canvas.width = img.width;
         ctx.drawImage(img, 0, 0);
-        let dataURL = canvas.toDataURL("image/jpeg");
-        callback(URL.createObjectURL(dataURL));
+        canvas.toBlob(blob => {
+            callback(URL.createObjectURL(blob));
+        }, "image/jpeg")
     };
     img.crossOrigin = 'anonymous';
     img.src = url;
