@@ -148,9 +148,9 @@ class Preview3D {
 
   doInitialAnimation(factor=1) {
     let pC = phoneContainer;
-    let {x,y} = getXYTransform(pC);
+    let {x,y} = this.getXYTransform(pC);
     let timeline = gsap.timeline({onUpdate: () => {
-      let {x,y} = getXYTransform(pC);
+      let {x,y} = this.getXYTransform(pC);
       this.moveBG(x, y);
     }});
 
