@@ -166,12 +166,16 @@ class Preview3D {
   }
 
   updateActiveDevice(e) {
-    let data_str = $(e.target).attr("data-device");
+    let btnClickedDevice = $(e.target);
+    let data_str = btnClickedDevice.attr("data-device");
     let device = JSON.parse(decodeURIComponent(data_str));
     let pC = phoneContainer;
     let pF = phoneFrame;
     let pII = phoneInnerImage;
     let { dimens, frameURL } = device;
+
+    divDeviceSelector.children().removeClass("active");
+    btnClickedDevice.addClass("active");
 
     pF.css({
       "background-image": `url(${frameURL})`,
