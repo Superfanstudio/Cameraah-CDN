@@ -32,7 +32,7 @@ class Preview3D {
     var _self = this;
     Webflow.resize.on(function () {
       _self.adjustInnerImageDimens();
-      _self.placeShowDemoButton();
+      //_self.placeShowDemoButton();
     });
     this.saveInitialPhonePosition();
     this.movePhone();
