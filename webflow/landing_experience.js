@@ -137,14 +137,14 @@ class Preview3D {
 
   doInitialAnimation(factor=1) {
     let pC = phoneContainer;
-    let {x,y} = this.util.getXYTransform(pC);
+    let {x,_} = this.util.getXYTransform(pC);
     let timeline = gsap.timeline({onUpdate: () => {
       let {x,y} = this.util.getXYTransform(pC);
       this.moveBG(x, y);
     }});
 
     timeline.to(pC, {opacity: 1, duration: 0.3});
-    timeline.to(phoneOverlay, {opacity: 0, duration: 0.3}, 0);
+    timeline.to(phoneOverlay, {opacity: 0.9, duration: 0.3}, 0);
     timeline.fromTo(pC, {x}, {x: x - factor * 100});
     timeline.to(pC, {x: `+=${factor * 200}`});
     timeline.to(pC, {x: `-=${factor * 100}`});
@@ -218,6 +218,7 @@ class Preview3D {
     }
     this.moveHandler = this.mouseMoveHandler.bind(this);
     $(document).bind("mousemove", this.moveHandler);
+    gsap.to(phoneOverlay, {opacity: 0, duration: 0.3}, 0);
   }
 
   exitPreviewMode() {
@@ -236,6 +237,7 @@ class Preview3D {
     this.movePhone(undefined, undefined, true);
     $(document).unbind("mousemove", this.moveHandler);
     this.mouseOffset = undefined;
+    gsap.to(phoneOverlay, {opacity: 0.9, duration: 0.3}, 0);
   }
 
   adjustInnerImageDimens() {
