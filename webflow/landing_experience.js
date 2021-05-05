@@ -36,7 +36,7 @@ class Preview3D {
     });
     this.saveInitialPhonePosition();
     this.movePhone();
-    pC.fadeIn(300);
+    phoneContainer.fadeIn(300);
     this.loadDeviceImages();
     this.setupDeviceSelectors();
   }
