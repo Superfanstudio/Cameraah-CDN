@@ -24,6 +24,8 @@ class Preview3D {
       },
     ];
     this.isDraggingPhone = false;
+    this.exitTryCount = 0;
+    this.maxExitTries = 2;
   }
 
   init() {
@@ -240,6 +242,9 @@ class Preview3D {
   }
 
   exitPreviewMode() {
+    if(++this.exitTryCount == this.maxExitTries) {
+      this.exitTryCount = 0;
+    } else return;
     let btn = btnStartDemo;
     let devices = divDeviceSelector;
 
