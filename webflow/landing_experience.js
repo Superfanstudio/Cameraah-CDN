@@ -1,11 +1,13 @@
 var phoneContainer = $("#phoneContainer");
 var phoneInnerImage = $("#phoneInnerImage");
+var phoneOverlay = $("#phoneContainer .overlay");
 var phoneFrame = $("#phoneFrame");
 var btnStartDemo = $("#Button-Start-Demo");
 var divDeviceSelector = $("#Device-Selection");
 
 class Preview3D {
   constructor() {
+    this.util = new PreviewUtil();
     let multiplier = 1.4;
     this.devices = [
       {
@@ -25,6 +27,7 @@ class Preview3D {
   }
 
   init() {
+    phoneContainer.show();
     this.addEvents();
     var _self = this;
     Webflow.resize.on(function () {
@@ -33,9 +36,8 @@ class Preview3D {
     });
     this.saveInitialPhonePosition();
     this.movePhone();
-    this.placeShowDemoButton();
+    this.loadDeviceImages();
     this.setupDeviceSelectors();
-    this.doInitialAnimation();
   }
 
   saveInitialPhonePosition() {
@@ -67,8 +69,8 @@ class Preview3D {
     let phoneWidth = pC.width();
     let phoneHeight = pC.height();
 
-    newX = this.snapTo(newX, 0, windowWidth - phoneWidth);
-    newY = this.snapTo(newY, 0, windowHeight - phoneHeight);
+    newX = this.util.snapTo(newX, 0, windowWidth - phoneWidth);
+    newY = this.util.snapTo(newY, 0, windowHeight - phoneHeight);
 
     // move phone
     if (animate) {
@@ -91,6 +93,13 @@ class Preview3D {
 
     this.lastPhonePosition.x = newX;
     this.lastPhonePosition.y = newY;
+  }
+
+  loadDeviceImages() {
+    this.util.loadImages([
+      "https://uploads-ssl.webflow.com/6049feb0a862ecb2aaeba05e/60842908790e4756cb361a7a_MicrosoftTeams-image%20(18).png", // phone bg
+      "https://uploads-ssl.webflow.com/6049feb0a862ecb2aaeba05e/60868c44d877c1fcbed4704b_iPad.png", // phone frame
+    ], this.doInitialAnimation); // this is called when all images have loaded.
   }
 
   moveBG(phoneX, phoneY, animate) {
@@ -148,21 +157,17 @@ class Preview3D {
 
   doInitialAnimation(factor=1) {
     let pC = phoneContainer;
-    let {x,y} = this.getXYTransform(pC);
+    let {x,y} = this.util.getXYTransform(pC);
     let timeline = gsap.timeline({onUpdate: () => {
-      let {x,y} = this.getXYTransform(pC);
+      let {x,y} = this.util.getXYTransform(pC);
       this.moveBG(x, y);
     }});
 
-    timeline.to(pC, {opacity: 1})
-    timeline.fromTo(pC, {x}, {x: x - factor * 100})
-    timeline.to(pC, {x: `+=${factor * 200}`})
-    timeline.to(pC, {x: `-=${factor * 100}`})
-  }
-
-  getXYTransform(ele) {
-    let matrix = ele.css("transform").replace(/[^0-9\-.,]/g, '').split(',').map(n=>parseFloat(n));
-    return {x: matrix[4], y: matrix[5]};
+    timeline.to(pC, {opacity: 1, duration: 0.3});
+    timeline.to(phoneOverlay, {opacity: 0, duration: 0.3}, 0);
+    timeline.fromTo(pC, {x}, {x: x - factor * 100});
+    timeline.to(pC, {x: `+=${factor * 200}`});
+    timeline.to(pC, {x: `-=${factor * 100}`});
   }
 
   updateActiveDevice(e) {
@@ -285,11 +290,30 @@ class Preview3D {
     let newY = mouseY - offset.y + $(window).scrollTop();
     this.movePhone(newX, newY);
   }
+  
+}
 
+class PreviewUtil {
   snapTo(value, lower, upper) {
     if (value <= lower) return lower;
     if (value >= upper) return upper;
     return value;
+  }
+
+  getXYTransform(ele) {
+    let matrix = ele.css("transform").replace(/[^0-9\-.,]/g, '').split(',').map(n=>parseFloat(n));
+    return {x: matrix[4], y: matrix[5]};
+  }
+
+  loadImages(files, onAllLoaded) {
+    var i = 0, numLoading = files.length;
+    const onload = () => --numLoading === 0 && onAllLoaded();
+    const images = {};
+    while (i < files.length) {
+        const img = new Image;
+        img.src = files[i++] + "";
+        img.onload = onload;
+    }
   }
 }
 
