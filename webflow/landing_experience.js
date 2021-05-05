@@ -29,7 +29,6 @@ class Preview3D {
   }
 
   init() {
-    phoneContainer.show();
     this.addEvents();
     var _self = this;
     Webflow.resize.on(function () {
@@ -58,6 +57,8 @@ class Preview3D {
   movePhone(newX, newY, animate = false) {
     let pC = phoneContainer;
     let pCClass = "." + pC.attr("class");
+
+    pC.fadeIn(300);
 
     let { x, y } = this.lastPhonePosition;
 
