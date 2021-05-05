@@ -99,7 +99,7 @@ class Preview3D {
     this.util.loadImages([
       "https://uploads-ssl.webflow.com/6049feb0a862ecb2aaeba05e/60842908790e4756cb361a7a_MicrosoftTeams-image%20(18).png", // phone bg
       "https://uploads-ssl.webflow.com/6049feb0a862ecb2aaeba05e/60868c44d877c1fcbed4704b_iPad.png", // phone frame
-    ], this.doInitialAnimation); // this is called when all images have loaded.
+    ], this.doInitialAnimation.bind(this)); // this is called when all images have loaded.
   }
 
   moveBG(phoneX, phoneY, animate) {
