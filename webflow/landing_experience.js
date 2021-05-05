@@ -33,10 +33,10 @@ class Preview3D {
     var _self = this;
     Webflow.resize.on(function () {
       _self.adjustInnerImageDimens();
-      //_self.placeShowDemoButton();
     });
     this.saveInitialPhonePosition();
     this.movePhone();
+    pC.fadeIn(300);
     this.loadDeviceImages();
     this.setupDeviceSelectors();
   }
@@ -57,9 +57,6 @@ class Preview3D {
   movePhone(newX, newY, animate = false) {
     let pC = phoneContainer;
     let pCClass = "." + pC.attr("class");
-
-    pC.fadeIn(300);
-
     let { x, y } = this.lastPhonePosition;
 
     if (!newX || !newY) this.saveInitialPhonePosition();
@@ -123,26 +120,6 @@ class Preview3D {
     }
   }
 
-  placeShowDemoButton() {
-    let btn = btnStartDemo;
-    let btnWidth = btn.width();
-    let btnHeight = btn.height();
-
-    let pC = phoneContainer;
-    let pCPosition = this.lastPhonePosition;
-    let pCX = pCPosition.x;
-    let pCY = pCPosition.y;
-    let pCWidth = pC.width();
-
-    let btnX = pCX + pCWidth / 2 - btnWidth / 2;
-    let btnY = pCY - btnHeight - 100;
-    btn.css({
-      left: btnX,
-      top: btnY,
-    });
-    btn.show();
-  }
-
   setupDeviceSelectors() {
     let divDevices = divDeviceSelector;
     let devices = this.devices;
@@ -171,6 +148,7 @@ class Preview3D {
     timeline.fromTo(pC, {x}, {x: x - factor * 100});
     timeline.to(pC, {x: `+=${factor * 200}`});
     timeline.to(pC, {x: `-=${factor * 100}`});
+    timeline.to(btnStartDemo, {opacity: 1, duration: 0.3});
   }
 
   updateActiveDevice(e) {
