@@ -142,8 +142,9 @@ class Preview3D {
       let {x,y} = this.util.getXYTransform(pC);
       this.moveBG(x, y);
     }});
-
-    timeline.to(pC, {opacity: 1, duration: 0.3});
+    
+    timeline.to($(".overlay .spinner"), {opacity: 0, duration: 0.3});
+    timeline.to(pC, {opacity: 1, duration: 0.3}, 0);
     timeline.to(phoneOverlay, {opacity: 0.9, duration: 0.3}, 0);
     timeline.fromTo(pC, {x}, {x: x - factor * 100});
     timeline.to(pC, {x: `+=${factor * 200}`});
