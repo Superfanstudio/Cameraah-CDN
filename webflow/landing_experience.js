@@ -231,7 +231,7 @@ class Preview3D {
     this.isDraggingPhone = false;
     $(".nav-copy, .nav-shadow").fadeIn(300);
     btn.fadeIn(300);
-    devices.fadeIn(300);
+    // devices.fadeIn(300);
     $("#main-heading").fadeIn(300);
 
     this.movePhone(undefined, undefined, true);
