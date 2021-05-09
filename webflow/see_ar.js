@@ -36,7 +36,7 @@ function addSeeARButtonEvents() {
         } else if(["ios","ipad","ipod"].includes(DEVICE_TYPE)) { // ios
             gotToDeviceLink(model.ios);
         } else { // web and others
-            $(model.qrSelector).show();
+            $(`#${model.qrSelector}`).show();
             $("#see-ar-modal").css("display","flex");
         }
     })
