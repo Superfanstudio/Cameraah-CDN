@@ -55,3 +55,9 @@ function gotToDeviceLink(href, isAndroid = false) {
     link.href = href;
     link.click();
 }
+
+try {
+    Webflow.push(addSeeARButtonEvents);
+  } catch (e) {
+    console.log("error in see-ar script");
+  }
