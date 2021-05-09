@@ -48,11 +48,9 @@ function addSeeARButtonEvents() {
         if (!modelName) return;
         let model = models[modelName];
         if(DEVICE_TYPE === "android") { // android
-            // gotToDeviceLink(model.android, true);
-            window.open(model.url, '_blank').focus();
+            gotToDeviceLink(model.android, true);
         } else if(["ios","ipad","ipod"].includes(DEVICE_TYPE)) { // ios
-            // gotToDeviceLink(model.ios);
-            window.open(model.url, '_blank').focus();
+            gotToDeviceLink(model.ios);
         } else { // web and others
             $(`#${model.qrSelector}`).show();
             $("#see-ar-modal").css("display","flex");
