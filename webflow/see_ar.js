@@ -1,5 +1,6 @@
 var DEVICE_TYPE = navigator.userAgent.toLocaleLowerCase().match(/android|ios|ipad|ipad/i);
 var link = document.createElement("a");
+document.body.appendChild(link);
 link.rel = "ar";
 
 function addSeeARButtonEvents() {
@@ -8,21 +9,25 @@ function addSeeARButtonEvents() {
             qrSelector: "see-ar-qr1",
             ios: "https://superfandotai.s3.amazonaws.com/WebAR/custom422.usdz",
             android: "https://cameraah.s3.amazonaws.com/exportedmodels/gltf/custom715.4121184481734.gltf",
+            url: "https://link.cameraah.com/8bKX",
         },
         lamp: {
             qrSelector: "see-ar-qr2",
             ios: "https://superfandotai.s3.amazonaws.com/WebAR/custom823.usdz",
             android: "https://cameraah.s3.amazonaws.com/exportedmodels/gltf/custom73.28520438789421.gltf",
+            url: "https://link.cameraah.com/NkadX",
         },
         sofa: {
             qrSelector: "see-ar-qr3",
             ios: "https://superfandotai.s3.amazonaws.com/WebAR/custom407.usdz",
             android: "https://cameraah.s3.amazonaws.com/exportedmodels/gltf/custom995.9546617632893.gltf",
+            url: "https://link.cameraah.com/0k2f",
         },
         tiles: {
             qrSelector: "see-ar-qr4",
             ios: "https://superfandotai.s3.amazonaws.com/WebAR/custom947.usdz",
             android: "https://cameraah.s3.amazonaws.com/exportedmodels/gltf/custom870.4063509960424.gltf",
+            url: "https://link.cameraah.com/QBB3",
         },
     }
 
@@ -42,7 +47,7 @@ function addSeeARButtonEvents() {
     })
 
     // Modal close button
-    $(".see-ar-modal-close").on("click", (e) => {
+    $("#see-ar-modal-close").on("click", (e) => {
         $("#see-ar-modal .qr").hide();
         $("#see-ar-modal").hide();
     })
