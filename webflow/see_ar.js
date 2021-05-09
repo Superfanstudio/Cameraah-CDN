@@ -1,4 +1,15 @@
-var DEVICE_TYPE = navigator.userAgent.toLocaleLowerCase().match(/android|ios|ipad|ipad/i)[0];
+var DEVICE_TYPE;
+
+function detectDevice() {
+    let matches = navigator.userAgent.toLocaleLowerCase().match(/android|ios|ipad|ipad/i);
+    if(matches) 
+        DEVICE_TYPE = matches[0];
+    else {
+        DEVICE_TYPE = "others";
+    }
+}
+detectDevice();
+
 var link = document.createElement("a");
 document.body.appendChild(link);
 link.rel = "ar";
@@ -37,9 +48,11 @@ function addSeeARButtonEvents() {
         if (!modelName) return;
         let model = models[modelName];
         if(DEVICE_TYPE === "android") { // android
-            gotToDeviceLink(model.android, true);
+            // gotToDeviceLink(model.android, true);
+            window.open(model.url, '_blank').focus();
         } else if(["ios","ipad","ipod"].includes(DEVICE_TYPE)) { // ios
-            gotToDeviceLink(model.ios);
+            // gotToDeviceLink(model.ios);
+            window.open(model.url, '_blank').focus();
         } else { // web and others
             $(`#${model.qrSelector}`).show();
             $("#see-ar-modal").css("display","flex");
