@@ -1,4 +1,4 @@
-var DEVICE_TYPE = navigator.userAgent.toLocaleLowerCase().match(/android|ios|ipad|ipad/i);
+var DEVICE_TYPE = navigator.userAgent.toLocaleLowerCase().match(/android|ios|ipad|ipad/i)[0];
 var link = document.createElement("a");
 document.body.appendChild(link);
 link.rel = "ar";
@@ -32,7 +32,7 @@ function addSeeARButtonEvents() {
     }
 
     // On click of `See in AR` buttons
-    $(".see-ar").on("click", (e) => {
+    $(".see-ar").on("click", e => {
         let modelName = $(e.target).data("model");
         if (!modelName) return;
         let model = models[modelName];
@@ -46,8 +46,10 @@ function addSeeARButtonEvents() {
         }
     })
 
+    $(".see-ar p").on("click", e => $(e.target).parent().click());
+
     // Modal close button
-    $("#see-ar-modal-close").on("click", (e) => {
+    $("#see-ar-modal-close").on("click", _ => {
         $("#see-ar-modal .qr").hide();
         $("#see-ar-modal").hide();
     })
