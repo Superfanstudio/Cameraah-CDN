@@ -97,7 +97,7 @@ class Preview3D {
   }
 
   loadDeviceImages() {
-    this.util.loadImages([PHONE_BG_URL, PHONE_FRAME_URL], 
+    this.util.loadImages([PHONE_BG_URL, IPHONE_FRAME_URL], 
       this.doInitialAnimation.bind(this) // this is called when all images have loaded.
     ); 
   }
