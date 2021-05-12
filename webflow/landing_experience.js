@@ -5,7 +5,8 @@ var phoneFrame = $("#phoneFrame");
 var btnStartDemo = $("#Button-Start-Demo");
 var divDeviceSelector = $("#Device-Selection");
 const PHONE_BG_URL = "https://uploads-ssl.webflow.com/6049feb0a862ecb2aaeba05e/60842908790e4756cb361a7a_MicrosoftTeams-image%20(18).png";
-const PHONE_FRAME_URL = "https://uploads-ssl.webflow.com/6049feb0a862ecb2aaeba05e/60868c44d877c1fcbed4704b_iPad.png";
+const IPHONE_FRAME_URL = "https://uploads-ssl.webflow.com/6049feb0a862ecb2aaeba05e/6071cb91a4f8de6dee978226_iphone_frame.png";
+const IPAD_FRAME_URL = "https://uploads-ssl.webflow.com/6049feb0a862ecb2aaeba05e/60868c44d877c1fcbed4704b_iPad.png";
 
 class Preview3D {
   constructor() {
@@ -14,14 +15,12 @@ class Preview3D {
     this.devices = [
       {
         iconClass: ".iphone-icon",
-        frameURL:
-          "https://uploads-ssl.webflow.com/6049feb0a862ecb2aaeba05e/6071cb91a4f8de6dee978226_iphone_frame.png",
+        frameURL: IPHONE_FRAME_URL,
         dimens: { w: 200 * multiplier, h: 400 * multiplier, br: 50 },
       },
       {
         iconClass: ".ipad-icon",
-        frameURL:
-          "https://uploads-ssl.webflow.com/6049feb0a862ecb2aaeba05e/60868c44d877c1fcbed4704b_iPad.png",
+        frameURL: IPAD_FRAME_URL,
         dimens: { w: 593 * multiplier, h: 426 * multiplier, br: 15 },
       },
     ];
