@@ -237,7 +237,7 @@ class Preview3D {
     // devices.fadeIn(300);
     $("#main-heading").fadeIn(300);
 
-    pC.css("cursor", "default");
+    phoneContainer.css("cursor", "default");
 
     this.movePhone(undefined, undefined, true);
     $(document).unbind("mousemove", this.moveHandler);
