@@ -210,6 +210,8 @@ class Preview3D {
     devices.fadeOut(300);
     $("#main-heading").fadeOut(300);
 
+    pC.css("cursor", "none");
+
     if (startPos) {
       this.movePhone(
         startPos.x - pC.width() / 2,
@@ -234,6 +236,8 @@ class Preview3D {
     btn.fadeIn(300);
     // devices.fadeIn(300);
     $("#main-heading").fadeIn(300);
+
+    pC.css("cursor", "default");
 
     this.movePhone(undefined, undefined, true);
     $(document).unbind("mousemove", this.moveHandler);
