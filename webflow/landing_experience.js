@@ -61,8 +61,8 @@ class Preview3D {
 
     if (!newX || !newY) this.saveInitialPhonePosition();
 
-    newX = newX || this.lastPhonePosition.x;
-    newY = newY || this.lastPhonePosition.y;
+    newX = newX == undefined ? this.lastPhonePosition.x : newX;
+    newY = newY == undefined ? this.lastPhonePosition.y : newY;
 
     let windowWidth = $(window).width();
     let windowHeight = $(window).height();
