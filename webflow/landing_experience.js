@@ -286,8 +286,8 @@ class Preview3D {
 
 class PreviewUtil {
   snapTo(value, lower, upper) {
-    if (value <= lower) return lower;
-    if (value >= upper) return upper;
+    if (value < lower) return lower;
+    if (value > upper) return upper;
     return value;
   }
 
