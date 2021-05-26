@@ -18,27 +18,27 @@ function addSeeARButtonEvents() {
     let models = {
         mug: {
             qrSelector: "see-ar-qr1",
-            ios: "https://superfandotai.s3.amazonaws.com/WebAR/custom422.usdz",
-            android: "https://cameraah.s3.amazonaws.com/exportedmodels/gltf/custom715.4121184481734.gltf",
-            url: "https://link.cameraah.com/8bKX",
+            ios: "https://superfandotai.s3.amazonaws.com/WebAR/custom344.usdz",
+            android: "https://cameraah.s3.amazonaws.com/prod/60ae4f0f92ec7b5564a99771/assets/gltf/custom980.9142878765631.gltf",
+            url: "https://link.cameraah.com/sRlO4",
         },
         lamp: {
             qrSelector: "see-ar-qr2",
-            ios: "https://superfandotai.s3.amazonaws.com/WebAR/custom823.usdz",
-            android: "https://cameraah.s3.amazonaws.com/exportedmodels/gltf/custom73.28520438789421.gltf",
-            url: "https://link.cameraah.com/NkadX",
+            ios: "https://superfandotai.s3.amazonaws.com/WebAR/custom981.usdz",
+            android: "https://cameraah.s3.amazonaws.com/prod/60ae4f0f92ec7b5564a99771/assets/gltf/custom669.9454158333755.gltf",
+            url: "https://link.cameraah.com/XigYRt",
         },
         sofa: {
             qrSelector: "see-ar-qr3",
-            ios: "https://superfandotai.s3.amazonaws.com/WebAR/custom407.usdz",
-            android: "https://cameraah.s3.amazonaws.com/exportedmodels/gltf/custom995.9546617632893.gltf",
-            url: "https://link.cameraah.com/0k2f",
+            ios: "https://superfandotai.s3.amazonaws.com/WebAR/custom930.usdz",
+            android: "https://cameraah.s3.amazonaws.com/prod/60ae4f0f92ec7b5564a99771/assets/gltf/custom960.7421683875115.gltf",
+            url: "https://link.cameraah.com/GtjTTG",
         },
         tiles: {
             qrSelector: "see-ar-qr4",
-            ios: "https://superfandotai.s3.amazonaws.com/WebAR/custom947.usdz",
-            android: "https://cameraah.s3.amazonaws.com/exportedmodels/gltf/custom870.4063509960424.gltf",
-            url: "https://link.cameraah.com/QBB3",
+            ios: "https://superfandotai.s3.amazonaws.com/WebAR/custom319.usdz",
+            android: "https://cameraah.s3.amazonaws.com/prod/60ae4f0f92ec7b5564a99771/assets/gltf/custom806.446536695252.gltf",
+            url: "https://link.cameraah.com/2WNT",
         },
     }
 
