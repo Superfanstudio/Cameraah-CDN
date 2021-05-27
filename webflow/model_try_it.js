@@ -2,25 +2,36 @@ const baseURL = "https://cameraah-labs.s3.ap-south-1.amazonaws.com/Website+asset
 const COLOR = 0;
 const TEXTURE = 1;
 var canvas = document.createElement('canvas');
+let rotateState = false
 function updateModel(model, type, modelComponent, newValue) {
     switch (type) {
-    case COLOR:
-        model.updateMaterialColor(modelComponent, newValue);
-        break;
-    case TEXTURE:
-        model.updateMaterialTexture(modelComponent, newValue);
-        break;
-    default:
-        break;
-    }    
+        case COLOR:
+            model.updateMaterialColor(modelComponent, newValue);
+            break;
+        case TEXTURE:
+            model.updateMaterialTexture(modelComponent, newValue);
+            break;
+        default:
+            break;
+    }
+}
+
+function updateRotation() {
+    addonClick('#auto-rotate-button', () => {
+        rotateState = !rotateState;
+        document.querySelector('#cycle-viewer').setAttribute('auto-rotate', rotateState);
+        document.querySelector('#case-viewer').setAttribute('auto-rotate', rotateState);
+        document.querySelector('#couch-viewer').setAttribute('auto-rotate', rotateState);
+    })
 }
 
 function addonClick(selector, callback) {
     $(selector).on('click', callback);
 }
 
-function handleCycleColor() {
+function handleCycle() {
     let cycle = document.querySelector('#cycle-viewer');
+    addonClick('#auto-rotate-button', () => { cycle.setAttribute('auto-rotate', !rotateState) })
     addonClick('#red-color-btn', () => updateModel(cycle, COLOR, 'red body', 'red'));
     addonClick('#yellow-color-btn', () => updateModel(cycle, COLOR, 'red body', 'yellow'));
     addonClick('#green-color-btn', () => updateModel(cycle, COLOR, 'red body', '#00ff2f'));
@@ -30,9 +41,10 @@ function handleCycleColor() {
     addonClick('#grey-handle-color-btn', () => updateModel(cycle, COLOR, 'black metal', 'grey'));
 
 }
+
 function handlePhoneCase() {
     let phone = document.querySelector('#case-viewer');
-    addonClick('#upload-texture-btn', e => {   
+    addonClick('#upload-texture-btn', e => {
         e.stopPropagation();
         $('#case-texture').click();
     });
@@ -42,6 +54,7 @@ function handlePhoneCase() {
         $('#upload-texture-btn').css('background-image', `url("${URL.createObjectURL(file)}")`);
     })
 }
+
 function handleCouch() {
     let couch = document.querySelector('#couch-viewer');
     addonClick('#couch-metallic', () => convertImgToBase64URL(baseURL + 'couch-texture-1.jpg', (url) => updateModel(couch, TEXTURE, 'Leather', url)));
@@ -53,13 +66,14 @@ function handleCouch() {
     addonClick('#pillow-red', () => convertImgToBase64URL(baseURL + 'pillow-texture-3.jpg', (url) => updateModel(couch, TEXTURE, 'Pillow1', url)));
 }
 
-handleCycleColor();
+handleCycle();
 handlePhoneCase();
 handleCouch();
+updateRotation();
 
 function convertImgToBase64URL(url, callback) {
     let img = new Image();
-    img.onload = function() {
+    img.onload = function () {
         ctx = canvas.getContext('2d');
         canvas.height = img.height;
         canvas.width = img.width;
